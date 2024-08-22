@@ -8,6 +8,9 @@ html {
   background-color: #242424;
   color: white;
   height: 100dvh;
+  font-family: "Kanit", sans-serif;
+  font-weight: 100;
+  font-style: normal;
 }
 
 body {
@@ -15,4 +18,10 @@ body {
   justify-content: center;
   align-items: center;
   height: 100dvh;
+  gap: 1rem;
+}
+
+img {
+  max-width: 40px;
+  height: auto;
 }
