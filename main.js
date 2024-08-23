@@ -2,7 +2,7 @@ const $ = (el) => document.querySelector(el)
 const $$ = (el) => document.querySelector(el)
 
 const ROWS = 10
-const COLUMNS = 3
+const COLUMNS = 5
 
 const range = (length) => Array.from({ length }, (_, i) => i)
 

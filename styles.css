@@ -28,3 +28,32 @@ section {
   align-items: center;
   gap: 1rem;
 }
+
+table {
+  border-collapse: collapse;
+}
+
+thead,
+tr td:first-child {
+  background-color: #171717;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  font-weight: normal;
+  font-size: 12px;
+  text-align: center;
+  width: 64px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+input {
+  background-color: #242424;
+  color: white;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+  width: 100%;
+}
