@@ -27,9 +27,11 @@ section {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  margin-top: 2rem;
 }
 
 table {
+  margin-top: 1rem;
   border-collapse: collapse;
 }
 
@@ -47,6 +49,17 @@ td {
   width: 64px;
   height: 20px;
   vertical-align: middle;
+  position: relative;
+}
+
+span,
+input {
+  position: absolute;
+  inset: 0;
+  vertical-align: middle;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 
 input {
