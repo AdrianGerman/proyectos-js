@@ -22,14 +22,28 @@ function updateCell({ x, y, value }) {
   const newState = structuredClone(STATE)
   const cell = newState[x][y]
 
-  const computedValue = Number(value)
-  cell.computedValue = computedValue // -> span
+  // const computedValue = Number(value)
+  cell.computedValue = computeValue(value) // -> span
   cell.value = value // -> input
 
   newState[x][y] = cell
   STATE = newState
 
   renderSpreadSheet()
+}
+
+function computeValue(value) {
+  if (!value.startsWith("=")) return value
+  const formula = value.slice(1)
+
+  let computedValue
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  try {
+    computedValue = eval(formula)
+  } catch (e) {
+    computedValue`!ERROR: ${e.message}`
+  }
+  return computedValue
 }
 
 const renderSpreadSheet = () => {
