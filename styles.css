@@ -69,4 +69,10 @@ input {
   opacity: 0;
   pointer-events: none;
   width: 100%;
+  border-radius: 2px;
+
+  &:focus {
+    opacity: 1;
+    outline: 2px solid #09f;
+  }
 }

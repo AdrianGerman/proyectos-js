@@ -1,6 +1,10 @@
 const $ = (el) => document.querySelector(el)
 const $$ = (el) => document.querySelector(el)
 
+const $table = $("table")
+const $head = $("thead")
+const $body = $("tbody")
+
 const ROWS = 10
 const COLUMNS = 5
 const FIRST_CHAR_CODE = 65
@@ -15,10 +19,6 @@ let STATE = range(COLUMNS).map((i) =>
 console.log(STATE)
 
 const renderSpreadSheet = () => {
-  const $table = $("table")
-  const $head = $("thead")
-  const $body = $("tbody")
-
   const headerHTML = `<tr>
     <th></th>
     ${range(COLUMNS)
@@ -48,5 +48,18 @@ const renderSpreadSheet = () => {
 
   $body.innerHTML = bodyHTML
 }
+
+$body.addEventListener("click", (event) => {
+  const td = event.target.closest("td")
+  if (!td) return
+
+  const { x, y } = td.dataset
+  const input = td.querySelector("input")
+  const span = td.querySelector("span")
+
+  const end = input.value.length
+  input.setSelectionRange(end, end)
+  input.focus()
+})
 
 renderSpreadSheet()
