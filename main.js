@@ -18,6 +18,20 @@ let STATE = range(COLUMNS).map((i) =>
 
 console.log(STATE)
 
+function updateCell({ x, y, value }) {
+  const newState = structuredClone(STATE)
+  const cell = newState[x][y]
+
+  const computedValue = Number(value)
+  cell.computedValue = computedValue // -> span
+  cell.value = value // -> input
+
+  newState[x][y] = cell
+  STATE = newState
+
+  renderSpreadSheet()
+}
+
 const renderSpreadSheet = () => {
   const headerHTML = `<tr>
     <th></th>
@@ -60,6 +74,21 @@ $body.addEventListener("click", (event) => {
   const end = input.value.length
   input.setSelectionRange(end, end)
   input.focus()
+
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") input.blur()
+  })
+
+  input.addEventListener(
+    "blur",
+    () => {
+      console.log({ value: input.value, state: STATE[x][y].value })
+
+      if (input.value === STATE[x][y].value) return
+      updateCell({ x, y, value: input.value })
+    },
+    { once: true }
+  )
 })
 
 renderSpreadSheet()
