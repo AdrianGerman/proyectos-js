@@ -158,4 +158,25 @@ document.addEventListener("keydown", (event) => {
   }
 })
 
+document.addEventListener("copy", (event) => {
+  if (selectedColumn !== null) {
+    const columnValues = range(ROWS).map((row) => {
+      return STATE[selectedColumn][row].computedValue
+    })
+    event.clipboardData.setData("text/plain", columnValues.join("\n"))
+    event.preventDefault()
+  }
+})
+
+document.addEventListener("click", (event) => {
+  const { target } = event
+  const isThClicked = target.closest("th")
+  const isTdClicked = target.closest("td")
+
+  if (!isThClicked && !isTdClicked) {
+    $$(".selected").forEach((el) => el.classList.remove("selected"))
+    selectedColumn = null
+  }
+})
+
 renderSpreadSheet()
