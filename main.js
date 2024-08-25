@@ -13,17 +13,18 @@ const range = (length) => Array.from({ length }, (_, i) => i)
 const getColumn = (i) => String.fromCharCode(FIRST_CHAR_CODE + i)
 
 let STATE = range(COLUMNS).map((i) =>
-  range(ROWS).map((j) => ({ computedValue: j, value: j }))
+  range(ROWS).map((j) => ({ computedValue: 0, value: 0 }))
 )
 
 console.log(STATE)
 
 function updateCell({ x, y, value }) {
   const newState = structuredClone(STATE)
+  const constants = generateCellsConstants(newState)
   const cell = newState[x][y]
 
   // const computedValue = Number(value)
-  cell.computedValue = computeValue(value) // -> span
+  cell.computedValue = computeValue(value, constants) // -> span
   cell.value = value // -> input
 
   newState[x][y] = cell
@@ -32,14 +33,31 @@ function updateCell({ x, y, value }) {
   renderSpreadSheet()
 }
 
-function computeValue(value) {
+function generateCellsConstants(cells) {
+  return cells
+    .map((rows, x) => {
+      return rows
+        .map((cell, y) => {
+          const letter = getColumn(x)
+          const cellId = `${letter}${y + 1}`
+          return `const ${cellId} = ${cell.computedValue};`
+        })
+        .join("\n")
+    })
+    .join("\n")
+}
+
+function computeValue(value, constants) {
   if (!value.startsWith("=")) return value
   const formula = value.slice(1)
 
   let computedValue
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   try {
-    computedValue = eval(formula)
+    computedValue = eval(`(() => {
+      ${constants}
+      return ${formula}
+    })()`)
   } catch (e) {
     computedValue`!ERROR: ${e.message}`
   }
