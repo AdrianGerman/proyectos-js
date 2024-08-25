@@ -1,5 +1,5 @@
 const $ = (el) => document.querySelector(el)
-const $$ = (el) => document.querySelector(el)
+const $$ = (el) => document.querySelectorAll(el)
 
 const $table = $("table")
 const $head = $("thead")
@@ -11,6 +11,8 @@ const FIRST_CHAR_CODE = 65
 
 const range = (length) => Array.from({ length }, (_, i) => i)
 const getColumn = (i) => String.fromCharCode(FIRST_CHAR_CODE + i)
+
+let selectedColumn = null
 
 let STATE = range(COLUMNS).map((i) =>
   range(ROWS).map((j) => ({ computedValue: 0, value: 0 }))
@@ -131,6 +133,20 @@ $body.addEventListener("click", (event) => {
     },
     { once: true }
   )
+})
+
+$head.addEventListener("click", (event) => {
+  const th = event.target.closest("th")
+  if (!th) return
+
+  const x = [...th.parentNode.children].indexOf(th)
+  if (x <= 0) return
+
+  selectedColumn = x - 1
+
+  $$(".selected").forEach((el) => el.classList.remove("selected"))
+  th.classList.add("selected")
+  $$(`tr td:nth-child(${x + 1})`).forEach((el) => el.classList.add("selected"))
 })
 
 renderSpreadSheet()

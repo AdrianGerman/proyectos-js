@@ -76,3 +76,11 @@ input {
     outline: 2px solid #09f;
   }
 }
+
+.selected {
+  background: #7eb9e193;
+}
+
+th.selected {
+  background-color: #5393bd;
+}
