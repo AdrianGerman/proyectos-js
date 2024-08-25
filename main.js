@@ -23,11 +23,12 @@ function updateCell({ x, y, value }) {
   const constants = generateCellsConstants(newState)
   const cell = newState[x][y]
 
-  // const computedValue = Number(value)
   cell.computedValue = computeValue(value, constants) // -> span
   cell.value = value // -> input
 
   newState[x][y] = cell
+
+  computeAllCells(newState, generateCellsConstants(newState))
   STATE = newState
 
   renderSpreadSheet()
@@ -47,12 +48,21 @@ function generateCellsConstants(cells) {
     .join("\n")
 }
 
+function computeAllCells(cells, constants) {
+  cells.forEach((rows, x) => {
+    rows.forEach((cell, y) => {
+      const computedValue = computeValue(cell.value, constants)
+      cell.computedValue = computedValue
+    })
+  })
+}
+
 function computeValue(value, constants) {
+  if (typeof value === "number") return value
   if (!value.startsWith("=")) return value
   const formula = value.slice(1)
 
   let computedValue
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   try {
     computedValue = eval(`(() => {
       ${constants}
