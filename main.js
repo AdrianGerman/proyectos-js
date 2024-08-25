@@ -149,4 +149,13 @@ $head.addEventListener("click", (event) => {
   $$(`tr td:nth-child(${x + 1})`).forEach((el) => el.classList.add("selected"))
 })
 
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Backspace" && selectedColumn !== null) {
+    range(ROWS).forEach((row) => {
+      updateCell({ x: selectedColumn, y: row, value: "" })
+    })
+    renderSpreadSheet()
+  }
+})
+
 renderSpreadSheet()
