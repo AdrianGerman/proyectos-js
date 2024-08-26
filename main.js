@@ -30,7 +30,7 @@ function updateCell({ x, y, value }) {
 
   newState[x][y] = cell
 
-  computeAllCells(newState, generateCellsConstants(newState))
+  computeAllCells(newState)
   STATE = newState
 
   renderSpreadSheet()
@@ -50,9 +50,10 @@ function generateCellsConstants(cells) {
     .join("\n")
 }
 
-function computeAllCells(cells, constants) {
+function computeAllCells(cells) {
   cells.forEach((rows, x) => {
     rows.forEach((cell, y) => {
+      const constants = generateCellsConstants(cells)
       const computedValue = computeValue(cell.value, constants)
       cell.computedValue = computedValue
     })
