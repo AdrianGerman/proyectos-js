@@ -1,14 +1,73 @@
+:root {
+  --color-s: #ff7f80;
+  --color-a: #ffc07f;
+  --color-b: #ffdf80;
+  --color-c: #fdff7f;
+  --color-d: #bfff7f;
+  --color-e: #7fff7f;
+  --color-f: #7fffff;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: #242424;
-  color: white;
 }
 
 body {
-  height: 100dvh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background: #242424;
+  color: white;
+  margin: 0 auto;
+  max-width: 500px;
+  padding-inline: 32px;
+  user-select: none;
+}
+
+button {
+  background: transparent;
+  border: 0;
+  color: white;
+  cursor: pointer;
+}
+
+header {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-block: 12px;
+  & img {
+    max-width: 150px;
+    height: auto;
+  }
+}
+
+.tier {
+  border: 1px solid #444;
+  display: flex;
+  flex-direction: column;
+  background: #1f1f1f;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #111;
+}
+
+.label {
+  cursor: pointer;
+  background: var(--level, #76428a);
+  color: #333;
+  font-weight: bold;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & span:focus {
+    outline: 1px solid #fff;
+  }
 }
