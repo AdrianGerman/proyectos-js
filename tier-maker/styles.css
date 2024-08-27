@@ -54,6 +54,11 @@ header {
   display: flex;
   flex-direction: row;
   border-bottom: 1px solid #111;
+  transition: all 0.3s ease;
+  &.drag-over {
+    background: #555;
+    scale: 1.01;
+  }
 }
 
 .label {
