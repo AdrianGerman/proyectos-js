@@ -16,16 +16,21 @@ function createItem(src) {
   return imgElement
 }
 
-imageInput.addEventListener("change", (event) => {
-  const [file] = event.target.files
-
-  if (file) {
-    const reader = new FileReader()
-    reader.onload = (eventReader) => {
-      createItem(eventReader.target.result)
-    }
-    reader.readAsDataURL(file)
+function useFilesToCreateItems(files) {
+  if (files && files.length > 0) {
+    Array.from(files).forEach((file) => {
+      const reader = new FileReader()
+      reader.onload = (eventReader) => {
+        createItem(eventReader.target.result)
+      }
+      reader.readAsDataURL(file)
+    })
   }
+}
+
+imageInput.addEventListener("change", (event) => {
+  const { files } = event.target
+  useFilesToCreateItems(files)
 })
 
 let draggendElement = null
@@ -61,7 +66,7 @@ function handleDrop(event) {
 
 function handleDragOver(event) {
   event.preventDefault()
-  const { currentTarget, dataTransfer } = event
+  const { currentTarget } = event
   if (sourceContainer === currentTarget) return
   currentTarget.classList.add("drag-over")
 
