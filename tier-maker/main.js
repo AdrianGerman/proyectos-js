@@ -4,6 +4,7 @@ const $$ = (el) => document.querySelectorAll(el)
 const imageInput = $("#image-input")
 const itemsSection = $("#selector-items")
 const resetButton = $("#reset-tier-button")
+const saveButton = $("#save-tier-button")
 
 function createItem(src) {
   const imgElement = document.createElement("img")
@@ -126,5 +127,24 @@ resetButton.addEventListener("click", () => {
   items.forEach((item) => {
     item.remove()
     itemsSection.appendChild(item)
+  })
+})
+
+saveButton.addEventListener("click", () => {
+  const tierContainer = $(".tier")
+  const canvas = document.createElement("canvas")
+  const ctx = canvas.getContext("2d")
+
+  import(
+    "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.esm.min.js"
+  ).then(({ default: html2canvas }) => {
+    html2canvas(tierContainer).then((canvas) => {
+      ctx.drawImage(canvas, 0, 0)
+      const imgURL = canvas.toDataURL("image/png")
+      const downloadLink = document.createElement("a")
+      downloadLink.download = "tier.png"
+      downloadLink.href = imgURL
+      downloadLink.click()
+    })
   })
 })
