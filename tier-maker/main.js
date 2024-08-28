@@ -3,6 +3,7 @@ const $$ = (el) => document.querySelectorAll(el)
 
 const imageInput = $("#image-input")
 const itemsSection = $("#selector-items")
+const resetButton = $("#reset-tier-button")
 
 function createItem(src) {
   const imgElement = document.createElement("img")
@@ -47,6 +48,30 @@ rows.forEach((row) => {
 itemsSection.addEventListener("dragover", handleDragOver)
 itemsSection.addEventListener("drop", handleDrop)
 itemsSection.addEventListener("dragleave", handleDragLeave)
+
+itemsSection.addEventListener("drop", handleDropFromDesktop)
+itemsSection.addEventListener("dragover", handleDragOverFromDesktop)
+
+function handleDragOverFromDesktop(event) {
+  event.preventDefault()
+
+  const { currentTarget, dataTransfer } = event
+
+  if (dataTransfer.types.includes("Files")) {
+    currentTarget.classList.add("drag-files")
+  }
+}
+
+function handleDropFromDesktop(event) {
+  event.preventDefault()
+  const { currentTarget, dataTransfer } = event
+
+  if (dataTransfer.types.includes("Files")) {
+    currentTarget.classList.remove("drag-files")
+    const { files } = dataTransfer
+    useFilesToCreateItems(files)
+  }
+}
 
 function handleDrop(event) {
   event.preventDefault()
@@ -95,3 +120,11 @@ function handleDragEnd(event) {
   draggendElement = null
   sourceContainer = null
 }
+
+resetButton.addEventListener("click", () => {
+  const items = $$(".tier .item-image")
+  items.forEach((item) => {
+    item.remove()
+    itemsSection.appendChild(item)
+  })
+})

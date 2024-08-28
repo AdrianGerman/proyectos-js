@@ -119,6 +119,12 @@ header {
   height: 100px;
   margin-bottom: 50px;
   display: flex;
+  flex-wrap: wrap;
+
+  &.drag-files {
+    background: #555;
+    border-style: dashed;
+  }
 }
 
 .item-image {
