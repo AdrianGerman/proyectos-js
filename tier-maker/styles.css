@@ -127,4 +127,9 @@ header {
   object-fit: cover;
   background: #fff;
   cursor: grab;
+
+  &.drag-preview {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 }
