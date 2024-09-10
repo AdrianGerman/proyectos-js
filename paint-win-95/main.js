@@ -1,1 +1,2 @@
-console.log("hello, from the js")
+const $ = (el) => document.querySelector(el)
+const $$ = (el) => document.querySelectorAll(el)

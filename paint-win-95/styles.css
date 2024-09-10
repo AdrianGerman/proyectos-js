@@ -6,4 +6,27 @@
 
 html {
   background: #242424;
+  color: white;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  padding: 16px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+h1 {
+  color: yellow;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+
+  & img {
+    width: 16px;
+    height: auto;
+  }
 }
