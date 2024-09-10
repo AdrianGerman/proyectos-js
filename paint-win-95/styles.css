@@ -1,6 +1,6 @@
-* {
-  margin: 0;
-  padding: 0;
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -29,4 +29,35 @@ h1 {
     width: 16px;
     height: auto;
   }
+}
+
+canvas {
+  background: white;
+}
+
+#container {
+  border: 1px solid #ccc;
+}
+
+header {
+  background: silver;
+  padding: 2px;
+
+  button {
+    border: 0;
+    background: transparent;
+
+    &:hover {
+      box-shadow: 1px 1px black, inset -1px -1px gray, inset 1px 1px white;
+    }
+  }
+}
+
+main {
+  padding: 16px;
+}
+
+footer {
+  background: silver;
+  padding: 4px;
 }
