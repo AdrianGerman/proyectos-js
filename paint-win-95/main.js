@@ -8,11 +8,12 @@ const MODES = {
 }
 
 // UTILITIES
-const $ = (el) => document.querySelector(el)
-const $$ = (el) => document.querySelectorAll(el)
+const $ = (selector) => document.querySelector(selector)
+const $$ = (selector) => document.querySelectorAll(selector)
 
 // ELEMENTS
 const $canvas = $("#canvas")
+const $colorPicker = $("#color-picker")
 const ctx = $canvas.getContext("2d")
 
 // STATE
@@ -27,6 +28,8 @@ $canvas.addEventListener("mousedown", startDrawing)
 $canvas.addEventListener("mousemove", draw)
 $canvas.addEventListener("mouseup", stopDrawing)
 $canvas.addEventListener("mouseleave", stopDrawing)
+
+$colorPicker.addEventListener("change", handleChangeColor)
 
 // METHODS
 function startDrawing(event) {
@@ -64,4 +67,9 @@ function draw(event) {
 
 function stopDrawing(event) {
   isDrawing = false
+}
+
+function handleChangeColor() {
+  const { value } = $colorPicker
+  ctx.strokeStyle = value
 }
