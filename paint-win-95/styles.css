@@ -37,9 +37,15 @@ canvas {
 
 #container {
   border: 1px solid #ccc;
+  display: grid;
+  grid-template-areas:
+    "header header header"
+    "aside main main"
+    "footer footer footer";
 }
 
 header {
+  grid-area: header;
   background: silver;
   padding: 2px;
 
@@ -54,15 +60,18 @@ header {
 }
 
 main {
+  grid-area: main;
   padding: 16px;
 }
 
 footer {
+  grid-area: footer;
   background: silver;
   padding: 4px;
 }
 
 aside {
+  grid-area: aside;
   background: silver;
   width: 52px;
   padding-top: 2px;
