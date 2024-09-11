@@ -56,8 +56,12 @@ function draw(event) {
 
   ctx.stroke()
 
-  //actualizar las últimas coordenadas
+  ctx.lineWidth = 2
+
+  // actualizar las últimas coordenadas
   ;[lastX, lastY] = [offsetX, offsetY]
 }
 
-function stopDrawing(event) {}
+function stopDrawing(event) {
+  isDrawing = false
+}
