@@ -14,6 +14,7 @@ const $$ = (selector) => document.querySelectorAll(selector)
 // ELEMENTS
 const $canvas = $("#canvas")
 const $colorPicker = $("#color-picker")
+const $clearBtn = $("#clear-btn")
 const ctx = $canvas.getContext("2d")
 
 // STATE
@@ -30,6 +31,7 @@ $canvas.addEventListener("mouseup", stopDrawing)
 $canvas.addEventListener("mouseleave", stopDrawing)
 
 $colorPicker.addEventListener("change", handleChangeColor)
+$clearBtn.addEventListener("click", clearCanvas)
 
 // METHODS
 function startDrawing(event) {
@@ -72,4 +74,8 @@ function stopDrawing(event) {
 function handleChangeColor() {
   const { value } = $colorPicker
   ctx.strokeStyle = value
+}
+
+function clearCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
 }
