@@ -17,6 +17,7 @@ const $colorPicker = $("#color-picker")
 const $clearBtn = $("#clear-btn")
 const $drawBtn = $("#draw-btn")
 const $rectangleBtn = $("#rectangle-btn")
+const $eraseBtn = $("#erase-btn")
 const ctx = $canvas.getContext("2d")
 
 // STATE
@@ -35,6 +36,10 @@ $canvas.addEventListener("mouseleave", stopDrawing)
 
 $colorPicker.addEventListener("change", handleChangeColor)
 $clearBtn.addEventListener("click", clearCanvas)
+
+$eraseBtn.addEventListener("click", () => {
+  setMode(MODES.ERASE)
+})
 
 $rectangleBtn.addEventListener("click", () => {
   setMode(MODES.RECTANGLE)
@@ -61,7 +66,7 @@ function draw(event) {
 
   const { offsetX, offsetY } = event
 
-  if (mode === MODES.DRAW) {
+  if (mode === MODES.DRAW || mode === MODES.ERASE) {
     // comenzar un trazadod
     ctx.beginPath()
 
@@ -111,13 +116,23 @@ function setMode(newMode) {
   if (mode === MODES.DRAW) {
     $drawBtn.classList.add("active")
     canvas.style.cursor = "crosshair"
-    ctx.lineWidth = 2
+    ctx.globalCompositeOperation = "source-over"
+    ctx.ctx.lineWidth = 2
     return
   }
   if (mode === MODES.RECTANGLE) {
     $rectangleBtn.classList.add("active")
     canvas.style.cursor = "nw-resize"
+    ctx.globalCompositeOperation = "source-over"
     ctx.lineWidth = 2
+    return
+  }
+
+  if (mode === MODES.ERASE) {
+    $eraseBtn.classList.add("active")
+    canvas.style.cursor = 'url("./assets/cursors/erase.png") 0 24, auto'
+    ctx.globalCompositeOperation = "destination-out"
+    ctx.lineWidth = 20
     return
   }
 }
