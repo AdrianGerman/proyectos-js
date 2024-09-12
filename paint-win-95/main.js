@@ -15,6 +15,8 @@ const $$ = (selector) => document.querySelectorAll(selector)
 const $canvas = $("#canvas")
 const $colorPicker = $("#color-picker")
 const $clearBtn = $("#clear-btn")
+const $drawBtn = $("#draw-btn")
+const $rectangleBtn = $("#rectangle-btn")
 const ctx = $canvas.getContext("2d")
 
 // STATE
@@ -23,6 +25,7 @@ let startX, startY
 let lastX = 0
 let lastY = 0
 let mode = MODES.DRAW
+let imageData
 
 // EVENTS
 $canvas.addEventListener("mousedown", startDrawing)
@@ -33,6 +36,14 @@ $canvas.addEventListener("mouseleave", stopDrawing)
 $colorPicker.addEventListener("change", handleChangeColor)
 $clearBtn.addEventListener("click", clearCanvas)
 
+$rectangleBtn.addEventListener("click", () => {
+  setMode(MODES.RECTANGLE)
+})
+
+$drawBtn.addEventListener("click", () => {
+  setMode(MODES.DRAW)
+})
+
 // METHODS
 function startDrawing(event) {
   isDrawing = true
@@ -42,7 +53,7 @@ function startDrawing(event) {
   ;[startX, startY] = [offsetX, offsetY]
   ;[lastX, lastY] = [offsetX, offsetY]
 
-  console.log({ startX, startY, lastX, lastY })
+  imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
 }
 
 function draw(event) {
@@ -50,21 +61,34 @@ function draw(event) {
 
   const { offsetX, offsetY } = event
 
-  // comenzar un trazadod
-  ctx.beginPath()
+  if (mode === MODES.DRAW) {
+    // comenzar un trazadod
+    ctx.beginPath()
 
-  // mover el trazadoa a las coordenadas actuales
-  ctx.moveTo(lastX, lastY)
+    // mover el trazadoa a las coordenadas actuales
+    ctx.moveTo(lastX, lastY)
 
-  // dibujar entre los puntos de coordenadas
-  ctx.lineTo(offsetX, offsetY)
+    // dibujar entre los puntos de coordenadas
+    ctx.lineTo(offsetX, offsetY)
 
-  ctx.stroke()
+    ctx.stroke()
 
-  ctx.lineWidth = 2
+    // actualizar las últimas coordenadas
+    ;[lastX, lastY] = [offsetX, offsetY]
 
-  // actualizar las últimas coordenadas
-  ;[lastX, lastY] = [offsetX, offsetY]
+    return
+  }
+
+  if (mode === MODES.RECTANGLE) {
+    ctx.putImageData(imageData, 0, 0)
+    const width = offsetX - startX
+    const height = offsetY - startY
+
+    ctx.beginPath()
+    ctx.rect(startX, startY, width, height)
+    ctx.stroke()
+    return
+  }
 }
 
 function stopDrawing(event) {
@@ -79,3 +103,24 @@ function handleChangeColor() {
 function clearCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 }
+
+function setMode(newMode) {
+  mode = newMode
+  $("button.active")?.classList.remove("active")
+
+  if (mode === MODES.DRAW) {
+    $drawBtn.classList.add("active")
+    canvas.style.cursor = "crosshair"
+    ctx.lineWidth = 2
+    return
+  }
+  if (mode === MODES.RECTANGLE) {
+    $rectangleBtn.classList.add("active")
+    canvas.style.cursor = "nw-resize"
+    ctx.lineWidth = 2
+    return
+  }
+}
+
+// INIT
+setMode(MODES.DRAW)
