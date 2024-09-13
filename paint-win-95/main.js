@@ -15,6 +15,7 @@ const $$ = (selector) => document.querySelectorAll(selector)
 // ELEMENTS
 const $canvas = $("#canvas")
 const $colorPicker = $("#color-picker")
+const $thicknessInput = $("#thickness")
 const $clearBtn = $("#clear-btn")
 const $drawBtn = $("#draw-btn")
 const $rectangleBtn = $("#rectangle-btn")
@@ -40,6 +41,7 @@ $canvas.addEventListener("mouseup", stopDrawing)
 $canvas.addEventListener("mouseleave", stopDrawing)
 
 $colorPicker.addEventListener("change", handleChangeColor)
+$thicknessInput.addEventListener("input", handleThicknessChange)
 $clearBtn.addEventListener("click", clearCanvas)
 
 document.addEventListener("keydown", handleKeyDown)
@@ -169,7 +171,7 @@ async function setMode(newMode) {
     $drawBtn.classList.add("active")
     canvas.style.cursor = "crosshair"
     ctx.globalCompositeOperation = "source-over"
-    ctx.lineWidth = 2
+    ctx.lineWidth = $thicknessInput.value // usar el valor del input
     return
   }
 
@@ -177,7 +179,7 @@ async function setMode(newMode) {
     $rectangleBtn.classList.add("active")
     canvas.style.cursor = "nw-resize"
     ctx.globalCompositeOperation = "source-over"
-    ctx.lineWidth = 2
+    ctx.lineWidth = $thicknessInput.value
     return
   }
 
@@ -185,7 +187,7 @@ async function setMode(newMode) {
     $ellipseBtn.classList.add("active")
     canvas.style.cursor = "nw-resize"
     ctx.globalCompositeOperation = "source-over"
-    ctx.lineWidth = 2
+    ctx.lineWidth = $thicknessInput.value
     return
   }
 
@@ -232,6 +234,11 @@ function handleKeyDown({ key }) {
 
 function handleKeyUp({ key }) {
   if (key === "Shift") isShiftPressed = false
+}
+
+function handleThicknessChange() {
+  const thickness = $thicknessInput.value
+  ctx.lineWidth = thickness
 }
 
 // INIT
