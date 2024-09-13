@@ -143,7 +143,10 @@ aside {
 /* input range style */
 
 input[type="range"] {
-  -webkit-appearance: none;
+  -webkit-appearance: none; /* Safari, Chrome */
+  -moz-appearance: none; /* Firefox */
+  -ms-appearance: none; /* Internet Explorer/Edge */
+  appearance: none; /* Propiedad estándar */
   position: relative;
   overflow: hidden;
   height: 20px;
