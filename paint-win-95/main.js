@@ -18,6 +18,7 @@ const $colorPicker = $("#color-picker")
 const $clearBtn = $("#clear-btn")
 const $drawBtn = $("#draw-btn")
 const $rectangleBtn = $("#rectangle-btn")
+const $ellipseBtn = $("#ellipse-btn")
 const $eraseBtn = $("#erase-btn")
 const $pickerBtn = $("#picker-btn")
 const $saveBtn = $("#save-btn")
@@ -54,6 +55,10 @@ $eraseBtn.addEventListener("click", () => {
 
 $rectangleBtn.addEventListener("click", () => {
   setMode(MODES.RECTANGLE)
+})
+
+$ellipseBtn.addEventListener("click", () => {
+  setMode(MODES.ELLIPSE)
 })
 
 $drawBtn.addEventListener("click", () => {
@@ -115,6 +120,31 @@ function draw(event) {
     ctx.stroke()
     return
   }
+
+  if (mode === MODES.ELLIPSE) {
+    ctx.putImageData(imageData, 0, 0)
+    let width = offsetX - startX
+    let height = offsetY - startY
+
+    if (isShiftPressed) {
+      const radius = Math.min(Math.abs(width), Math.abs(height))
+      width = width > 0 ? radius : -radius
+      height = height > 0 ? radius : -radius
+    }
+
+    ctx.beginPath()
+    ctx.ellipse(
+      startX + width / 2,
+      startY + height / 2,
+      Math.abs(width) / 2,
+      Math.abs(height) / 2,
+      0,
+      0,
+      2 * Math.PI
+    )
+    ctx.stroke()
+    return
+  }
 }
 
 function stopDrawing(event) {
@@ -142,8 +172,17 @@ async function setMode(newMode) {
     ctx.lineWidth = 2
     return
   }
+
   if (mode === MODES.RECTANGLE) {
     $rectangleBtn.classList.add("active")
+    canvas.style.cursor = "nw-resize"
+    ctx.globalCompositeOperation = "source-over"
+    ctx.lineWidth = 2
+    return
+  }
+
+  if (mode === MODES.ELLIPSE) {
+    $ellipseBtn.classList.add("active")
     canvas.style.cursor = "nw-resize"
     ctx.globalCompositeOperation = "source-over"
     ctx.lineWidth = 2
