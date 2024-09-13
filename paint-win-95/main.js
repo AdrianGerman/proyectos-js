@@ -18,6 +18,7 @@ const $clearBtn = $("#clear-btn")
 const $drawBtn = $("#draw-btn")
 const $rectangleBtn = $("#rectangle-btn")
 const $eraseBtn = $("#erase-btn")
+const $pickerBtn = $("#picker-btn")
 const ctx = $canvas.getContext("2d")
 
 // STATE
@@ -36,6 +37,10 @@ $canvas.addEventListener("mouseleave", stopDrawing)
 
 $colorPicker.addEventListener("change", handleChangeColor)
 $clearBtn.addEventListener("click", clearCanvas)
+
+$pickerBtn.addEventListener("click", () => {
+  setMode(MODES.PICKER)
+})
 
 $eraseBtn.addEventListener("click", () => {
   setMode(MODES.ERASE)
@@ -117,7 +122,7 @@ function setMode(newMode) {
     $drawBtn.classList.add("active")
     canvas.style.cursor = "crosshair"
     ctx.globalCompositeOperation = "source-over"
-    ctx.ctx.lineWidth = 2
+    ctx.lineWidth = 2
     return
   }
   if (mode === MODES.RECTANGLE) {
@@ -135,7 +140,17 @@ function setMode(newMode) {
     ctx.lineWidth = 20
     return
   }
+
+  if (mode === MODES.PICKER) {
+    $pickerBtn.classList.add("active")
+    return
+  }
 }
 
 // INIT
 setMode(MODES.DRAW)
+
+// show picker if browser has support
+if (typeof window.EyeDropper !== "undefined") {
+  $pickerBtn.style.display = "block"
+}
