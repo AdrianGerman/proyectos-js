@@ -183,7 +183,7 @@ async function setMode(newMode) {
 
   if (mode === MODES.DRAW) {
     $drawBtn.classList.add("active")
-    canvas.style.cursor = "crosshair"
+    canvas.style.cursor = 'url("./assets/cursors/pincel.png") 0 24, auto'
     ctx.globalCompositeOperation = "source-over"
     ctx.lineWidth = $thicknessInput.value // usar el valor del input
     return
@@ -191,7 +191,7 @@ async function setMode(newMode) {
 
   if (mode === MODES.RECTANGLE) {
     $rectangleBtn.classList.add("active")
-    canvas.style.cursor = "nw-resize"
+    canvas.style.cursor = 'url("./assets/cursors/point.png") 0 24, auto'
     ctx.globalCompositeOperation = "source-over"
     ctx.lineWidth = $thicknessInput.value
     return
@@ -199,7 +199,7 @@ async function setMode(newMode) {
 
   if (mode === MODES.ELLIPSE) {
     $ellipseBtn.classList.add("active")
-    canvas.style.cursor = "nw-resize"
+    canvas.style.cursor = 'url("./assets/cursors/point.png") 0 24, auto'
     ctx.globalCompositeOperation = "source-over"
     ctx.lineWidth = $thicknessInput.value
     return
