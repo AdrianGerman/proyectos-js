@@ -127,3 +127,8 @@ aside {
   background-image: url("./assets/icons/trash.png");
   background-size: 20px;
 }
+
+#save-btn {
+  background-image: url("./assets/icons/save.png");
+  background-size: 12px;
+}

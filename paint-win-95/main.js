@@ -4,7 +4,8 @@ const MODES = {
   ERASE: "erase",
   RECTANGLE: "rectangle",
   ELLIPSE: "ellipse",
-  PICKER: "picker"
+  PICKER: "picker",
+  SAVE: "save"
 }
 
 // UTILITIES
@@ -19,6 +20,7 @@ const $drawBtn = $("#draw-btn")
 const $rectangleBtn = $("#rectangle-btn")
 const $eraseBtn = $("#erase-btn")
 const $pickerBtn = $("#picker-btn")
+const $saveBtn = $("#save-btn")
 const ctx = $canvas.getContext("2d")
 
 // STATE
@@ -56,6 +58,10 @@ $rectangleBtn.addEventListener("click", () => {
 
 $drawBtn.addEventListener("click", () => {
   setMode(MODES.DRAW)
+})
+
+$saveBtn.addEventListener("click", () => {
+  setMode(MODES.SAVE)
 })
 
 // METHODS
@@ -164,6 +170,19 @@ async function setMode(newMode) {
     } catch (e) {
       // si ha habido un error o el usuario no ha recuperado ningún color
     }
+    return
+  }
+
+  if (mode === MODES.SAVE) {
+    ctx.globalCompositeOperation = "destination-over"
+    ctx.fillStyle = "white"
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+    const link = document.createElement("a")
+    link.href = canvas.toDataURL()
+    link.download = "mi-draw.png"
+    link.click()
+    setMode(previousMode)
     return
   }
 }
