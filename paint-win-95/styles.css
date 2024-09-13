@@ -140,6 +140,10 @@ aside {
   background-size: 18px;
 }
 
+#fill-btn {
+  background-image: url("./assets/icons/fill.png");
+}
+
 /* input range style */
 
 input[type="range"] {

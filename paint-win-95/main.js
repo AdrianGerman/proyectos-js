@@ -5,7 +5,8 @@ const MODES = {
   RECTANGLE: "rectangle",
   ELLIPSE: "ellipse",
   PICKER: "picker",
-  SAVE: "save"
+  SAVE: "save",
+  FILL: "fill"
 }
 
 // UTILITIES
@@ -23,6 +24,7 @@ const $ellipseBtn = $("#ellipse-btn")
 const $eraseBtn = $("#erase-btn")
 const $pickerBtn = $("#picker-btn")
 const $saveBtn = $("#save-btn")
+const $fillBtn = $("#fill-btn")
 const ctx = $canvas.getContext("2d")
 
 // STATE
@@ -46,6 +48,10 @@ $clearBtn.addEventListener("click", clearCanvas)
 
 document.addEventListener("keydown", handleKeyDown)
 document.addEventListener("keyup", handleKeyUp)
+
+$fillBtn.addEventListener("click", () => {
+  setMode(MODES.FILL)
+})
 
 $pickerBtn.addEventListener("click", () => {
   setMode(MODES.PICKER)
@@ -81,6 +87,14 @@ function startDrawing(event) {
   ;[lastX, lastY] = [offsetX, offsetY]
 
   imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+
+  // Si el modo es FILL, rellenara el canvas
+  if (mode === MODES.FILL) {
+    const fillColor = $colorPicker.value
+    ctx.fillStyle = fillColor
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    isDrawing = false
+  }
 }
 
 function draw(event) {
@@ -212,6 +226,11 @@ async function setMode(newMode) {
       // si ha habido un error o el usuario no ha recuperado ningún color
     }
     return
+  }
+
+  if (mode === MODES.FILL) {
+    $fillBtn.classList.add("active")
+    canvas.style.cursor = 'url("./assets/icons/fill.png") 0 24, auto'
   }
 
   if (mode === MODES.SAVE) {
