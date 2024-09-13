@@ -99,6 +99,10 @@ aside {
       border-right-color: #eee;
       border-bottom-color: #eee;
     }
+    &[disabled] {
+      pointer-events: none;
+      opacity: 0.2;
+    }
   }
 }
 
@@ -116,7 +120,7 @@ aside {
 
 #picker-btn {
   background-image: url("./assets/icons/picker.png");
-  display: none;
+  /* display: none; */
 }
 
 #clear-btn {

@@ -114,7 +114,8 @@ function clearCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 }
 
-function setMode(newMode) {
+async function setMode(newMode) {
+  let previousMode = mode
   mode = newMode
   $("button.active")?.classList.remove("active")
 
@@ -143,6 +144,16 @@ function setMode(newMode) {
 
   if (mode === MODES.PICKER) {
     $pickerBtn.classList.add("active")
+    const EyeDropper = new window.EyeDropper()
+    try {
+      const result = await EyeDropper.open()
+      const { sRGBHex } = result
+      ctx.strokeStyle = sRGBHex
+      $colorPicker.value = sRGBHex
+      setMode(previousMode)
+    } catch (e) {
+      // si ha habido un error o el usuario no ha recuperado ningún color
+    }
     return
   }
 }
@@ -152,5 +163,5 @@ setMode(MODES.DRAW)
 
 // show picker if browser has support
 if (typeof window.EyeDropper !== "undefined") {
-  $pickerBtn.style.display = "block"
+  $pickerBtn.removeAttribute("disabled")
 }
