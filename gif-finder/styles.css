@@ -63,10 +63,24 @@ main {
 .content-section {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  div {
-    width: 200px;
-    height: 200px;
-    background-color: red;
+  grid-gap: 10px;
+  grid-auto-rows: auto;
+  & .gif-item {
+    border: 1px solid #ccc;
+    & img {
+      width: 300px;
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .content-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 430px) {
+  .content-section {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
