@@ -28,7 +28,7 @@ main {
   & .search-container {
     position: relative;
     width: 100%;
-    max-width: 400px;
+    min-width: 400px;
     margin: 0 auto;
     & input {
       width: 100%;
@@ -64,22 +64,29 @@ main {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
-  grid-auto-rows: auto;
+  grid-auto-flow: dense;
+  grid-template-rows: auto;
   & .gif-item {
+    display: flex;
     border: 1px solid #ccc;
+
     & img {
+      object-fit: cover;
+      background-position: center;
+      cursor: pointer;
       width: 300px;
+      height: 400px;
     }
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 950px) {
   .content-section {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 430px) {
+@media (max-width: 630px) {
   .content-section {
     grid-template-columns: repeat(1, 1fr);
   }
