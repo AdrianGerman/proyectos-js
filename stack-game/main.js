@@ -20,7 +20,7 @@ let scrollCounter, cameraY, current, mode, xSpeed, ySpeed
 function initializeGameState() {
   boxes = [
     {
-      x: canvas.width / 2,
+      x: canvas.width / 2 - INITIAL_BOX_WIDTH / 2,
       y: 200,
       width: INITIAL_BOX_WIDTH,
       color: "white"
@@ -37,6 +37,30 @@ function initializeGameState() {
 function restart() {
   initializeGameState()
   draw()
+}
+
+function draw() {
+  if (mode === MODES.GAMEOVER) return
+
+  drawBackground()
+  drawBoxes()
+
+  window.requestAnimationFrame(draw)
+}
+
+function drawBackground() {
+  context.fillStyle = "rgba(0, 0, 0, 0.2)"
+  context.fillRect(0, 0, canvas.width, canvas.height)
+}
+
+function drawBoxes() {
+  boxes.forEach((box) => {
+    const { x, y, width, color } = box
+    const newY = INITIAL_BOX_Y - y
+
+    context.fillStyle = color
+    context.fillRect(x, newY, width, BOX_HEIGHT)
+  })
 }
 
 restart()
