@@ -32,6 +32,8 @@ function initializeGameState() {
   ySpeed = INITIAL_Y_SPEED
   scrollCounter = 0
   cameraY = 0
+
+  createNewBox()
 }
 
 function restart() {
@@ -44,6 +46,10 @@ function draw() {
 
   drawBackground()
   drawBoxes()
+
+  if (mode === MODES.BOUNCE) {
+    moveAndDetectCollision()
+  }
 
   window.requestAnimationFrame(draw)
 }
@@ -61,6 +67,32 @@ function drawBoxes() {
     context.fillStyle = color
     context.fillRect(x, newY, width, BOX_HEIGHT)
   })
+}
+
+function createNewBox() {
+  boxes[current] = {
+    x: 0,
+    y: (current + 10) * BOX_HEIGHT,
+    width: boxes[current - 1].width,
+    color: "white"
+  }
+}
+
+function moveAndDetectCollision() {
+  const currentBox = boxes[current]
+  currentBox.x += xSpeed
+
+  const isMovingRight = xSpeed > 0
+  const isMovingLeft = xSpeed < 0
+
+  const hasHitRightSide = currentBox.x + currentBox.width > canvas.width
+
+  const hasHitLeftSide = currentBox.x < 0
+
+  if ((isMovingRight && hasHitRightSide) || (isMovingLeft && hasHitLeftSide)) {
+    // xSpeed *= -1 or ---
+    xSpeed = -xSpeed
+  }
 }
 
 restart()
