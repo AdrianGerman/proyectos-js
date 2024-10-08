@@ -1,6 +1,8 @@
 const canvas = document.querySelector("canvas")
 const context = canvas.getContext("2d")
 
+const score = document.querySelector("#score")
+
 const MODES = {
   FALL: "fall",
   BOUNCE: "bounce",
@@ -151,6 +153,18 @@ function adjustCurrentBox(difference) {
   }
 }
 
+function gameOver() {
+  mode = MODES.GAMEOVER
+
+  context.fillStyle = "rgba(255, 0, 0, 0.5)"
+  context.fillRect(0, 0, canvas.width, canvas.height)
+
+  context.font = "bold 20px Arial"
+  context.fillStyle = "white"
+  context.textAlign = "center"
+  context.fillText("Game Over", canvas.width / 2, canvas.height / 2)
+}
+
 function handleBoxLanding() {
   const currentBox = boxes[current]
   const previousBox = boxes[current - 1]
@@ -158,7 +172,7 @@ function handleBoxLanding() {
   const difference = currentBox.x - previousBox.x
 
   if (Math.abs(difference) >= currentBox.width) {
-    mode = MODES.GAMEOVER
+    gameOver()
     return
   }
 
@@ -169,6 +183,8 @@ function handleBoxLanding() {
   current++
   scrollCounter = BOX_HEIGHT
   mode = MODES.BOUNCE
+
+  score.textContent = current - 1
 
   createNewBox()
 }
@@ -195,5 +211,13 @@ document.addEventListener("keydown", (event) => {
     mode = MODES.FALL
   }
 })
+
+canvas.onpointerdown = () => {
+  if (mode === MODES.GAMEOVER) {
+    restart()
+  } else if (mode === MODES.BOUNCE) {
+    mode = MODES.FALL
+  }
+}
 
 restart()
