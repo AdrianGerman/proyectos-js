@@ -13,11 +13,11 @@ const INITIAL_BOX_Y = 600
 
 const BOX_HEIGHT = 50
 const INITIAL_Y_SPEED = 5
-const INITAL_X_SPEED = 2
+const INITIAL_X_SPEED = 2
 
 // state
 let boxes = []
-let debris = { x: 0, y: 0, width: 0, height: 0 }
+let debris = { x: 0, y: 0, width: 0 }
 let scrollCounter, cameraY, current, mode, xSpeed, ySpeed
 
 function createStepColor(step) {
@@ -49,7 +49,7 @@ function initializeGameState() {
   debris = { x: 0, y: 0, width: 0 }
   current = 1
   mode = MODES.BOUNCE
-  xSpeed = INITAL_X_SPEED
+  xSpeed = INITIAL_X_SPEED
   ySpeed = INITIAL_Y_SPEED
   scrollCounter = 0
   cameraY = 0
@@ -82,7 +82,7 @@ function draw() {
 }
 
 function drawBackground() {
-  context.fillStyle = "rgba(0, 0, 0, 0.2)"
+  context.fillStyle = "rgba(0, 0, 0, 0.9)"
   context.fillRect(0, 0, canvas.width, canvas.height)
 }
 
