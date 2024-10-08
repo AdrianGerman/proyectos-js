@@ -17,6 +17,23 @@ const INITAL_X_SPEED = 2
 let boxes = []
 let scrollCounter, cameraY, current, mode, xSpeed, ySpeed
 
+function createStepColor(step) {
+  if (step === 0) return "white"
+
+  const red = Math.floor(Math.random() * 255)
+  const green = Math.floor(Math.random() * 255)
+  const blue = Math.floor(Math.random() * 255)
+
+  return `rgb(${red}, ${green}, ${blue})`
+}
+
+function updateCamera() {
+  if (scrollCounter > 0) {
+    cameraY++
+    scrollCounter--
+  }
+}
+
 function initializeGameState() {
   boxes = [
     {
@@ -53,6 +70,8 @@ function draw() {
     updateFallMode()
   }
 
+  updateCamera()
+
   window.requestAnimationFrame(draw)
 }
 
@@ -64,7 +83,7 @@ function drawBackground() {
 function drawBoxes() {
   boxes.forEach((box) => {
     const { x, y, width, color } = box
-    const newY = INITIAL_BOX_Y - y
+    const newY = INITIAL_BOX_Y - y + cameraY
 
     context.fillStyle = color
     context.fillRect(x, newY, width, BOX_HEIGHT)
@@ -76,7 +95,7 @@ function createNewBox() {
     x: 0,
     y: (current + 10) * BOX_HEIGHT,
     width: boxes[current - 1].width,
-    color: "white"
+    color: createStepColor(current)
   }
 }
 
