@@ -110,6 +110,20 @@ function updateFallMode() {
   }
 }
 
+function adjustCurrentBox(difference) {
+  const currentBox = boxes[current]
+  const previousBox = boxes[current - 1]
+
+  if (currentBox.x > previousBox.x) {
+    console.log("sobra la caja por la derecha")
+    currentBox.width -= difference
+  } else {
+    currentBox.width += difference
+    currentBox.x = previousBox.x
+    console.log("sobra la caja por la izquierda")
+  }
+}
+
 function handleBoxLanding() {
   const currentBox = boxes[current]
   const previousBox = boxes[current - 1]
@@ -120,6 +134,8 @@ function handleBoxLanding() {
     mode = MODES.GAMEOVER
     return
   }
+
+  adjustCurrentBox(difference)
 
   xSpeed += xSpeed > 0 ? 1 : -1
   current++
