@@ -15,6 +15,7 @@ const INITAL_X_SPEED = 2
 
 // state
 let boxes = []
+let debris = { x: 0, y: 0, width: 0, height: 0 }
 let scrollCounter, cameraY, current, mode, xSpeed, ySpeed
 
 function createStepColor(step) {
@@ -43,6 +44,7 @@ function initializeGameState() {
       color: "white"
     }
   ]
+  debris = { x: 0, y: 0, width: 0 }
   current = 1
   mode = MODES.BOUNCE
   xSpeed = INITAL_X_SPEED
@@ -63,6 +65,7 @@ function draw() {
 
   drawBackground()
   drawBoxes()
+  drawDebris()
 
   if (mode === MODES.BOUNCE) {
     moveAndDetectCollision()
@@ -70,6 +73,7 @@ function draw() {
     updateFallMode()
   }
 
+  debris.y -= ySpeed
   updateCamera()
 
   window.requestAnimationFrame(draw)
@@ -78,6 +82,14 @@ function draw() {
 function drawBackground() {
   context.fillStyle = "rgba(0, 0, 0, 0.2)"
   context.fillRect(0, 0, canvas.width, canvas.height)
+}
+
+function drawDebris() {
+  const { x, y, width } = debris
+  const newY = INITIAL_BOX_Y - y + cameraY
+
+  context.fillStyle = "red"
+  context.fillRect(x, newY, width, BOX_HEIGHT)
 }
 
 function drawBoxes() {
@@ -96,6 +108,21 @@ function createNewBox() {
     y: (current + 10) * BOX_HEIGHT,
     width: boxes[current - 1].width,
     color: createStepColor(current)
+  }
+}
+
+function createNewDebris(difference) {
+  const currentBox = boxes[current]
+  const previousBox = boxes[current - 1]
+
+  const debrisX =
+    currentBox.x > previousBox.x
+      ? currentBox.x + currentBox.width
+      : currentBox.x
+  debris = {
+    x: debrisX,
+    y: currentBox.y,
+    width: difference
   }
 }
 
@@ -136,6 +163,7 @@ function handleBoxLanding() {
   }
 
   adjustCurrentBox(difference)
+  createNewDebris(difference)
 
   xSpeed += xSpeed > 0 ? 1 : -1
   current++
