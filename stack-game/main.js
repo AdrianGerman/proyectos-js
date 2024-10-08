@@ -87,8 +87,27 @@ function updateFallMode() {
   const positionPreviousBox = boxes[current - 1].y + BOX_HEIGHT
 
   if (currentBox.y === positionPreviousBox) {
-    console.log("hit")
+    handleBoxLanding()
   }
+}
+
+function handleBoxLanding() {
+  const currentBox = boxes[current]
+  const previousBox = boxes[current - 1]
+
+  const difference = currentBox.x - previousBox.x
+
+  if (Math.abs(difference) >= currentBox.width) {
+    mode = MODES.GAMEOVER
+    return
+  }
+
+  xSpeed += xSpeed > 0 ? 1 : -1
+  current++
+  scrollCounter = BOX_HEIGHT
+  mode = MODES.BOUNCE
+
+  createNewBox()
 }
 
 function moveAndDetectCollision() {
