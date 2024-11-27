@@ -16,3 +16,31 @@ body {
   gap: 2rem;
   height: 100vh;
 }
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+
+section {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  border: 1px solid white;
+}
+
+.charizard-envelope,
+.mewtwo-envelope,
+.pikachu-envelope {
+  width: 150px;
+  height: 220px;
+  background-color: black;
+}
+
+div {
+  width: 320px;
+  height: 70px;
+  background-color: black;
+}
