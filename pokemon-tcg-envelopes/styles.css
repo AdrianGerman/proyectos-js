@@ -53,9 +53,38 @@ img:hover {
 
 .counter {
   width: 320px;
-  height: 70px;
-  background-color: black;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  width: 55px;
+  height: 55px;
+  border: 2px solid white;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+input[type="checkbox"]:checked {
+  background-color: white;
+  transform: scale(1.1);
+}
+
+input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: 0 0 5px white;
+}
+
+.charizard-labels-container,
+.mewtwo-labels-container,
+.pikachu-labels-container {
+  display: flex;
+  gap: 0.7rem;
 }
