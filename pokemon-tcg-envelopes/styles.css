@@ -28,7 +28,6 @@ section {
   display: flex;
   gap: 1rem;
   align-items: center;
-  border: 1px solid white;
 }
 
 .charizard-envelope,
@@ -36,11 +35,26 @@ section {
 .pikachu-envelope {
   width: 150px;
   height: 220px;
-  background-color: black;
 }
 
-div {
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 300ms;
+  cursor: pointer;
+}
+
+img:hover {
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 5));
+  transform: scale(1.05);
+}
+
+.counter {
   width: 320px;
   height: 70px;
   background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
