@@ -27,15 +27,31 @@ main {
 
 section {
   display: flex;
-  gap: 1rem;
+  justify-content: center;
   align-items: center;
+  gap: 1.3rem;
+  border-radius: 12px;
+  box-shadow: 2px 2px 20px 14px rgba(0, 0, 0, 0.5);
+  padding: 0.7rem;
+}
+
+.charizard-section {
+  background-color: #fd7d24;
+}
+
+.mewtwo-section {
+  background-color: #f366b9;
+}
+
+.pikachu-section {
+  background-color: #f9bf00;
 }
 
 .charizard-envelope,
 .mewtwo-envelope,
 .pikachu-envelope {
-  width: 150px;
-  height: 220px;
+  width: 120px;
+  height: 200px;
 }
 
 img {
@@ -52,7 +68,6 @@ img:hover {
 }
 
 .counter {
-  width: 320px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -60,11 +75,12 @@ img:hover {
   gap: 1rem;
 }
 
+/* General styles for checkboxes */
 input[type="checkbox"] {
   appearance: none;
   width: 55px;
   height: 55px;
-  border: 2px solid white;
+  border: 3px solid white;
   border-radius: 50%;
   display: inline-block;
   position: relative;
@@ -73,13 +89,39 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked {
-  background-color: white;
   transform: scale(1.1);
 }
 
 input[type="checkbox"]:focus {
   outline: none;
   box-shadow: 0 0 5px white;
+}
+
+.charizard-section input[type="checkbox"] {
+  border-color: #e5530d;
+  background-color: white;
+}
+
+.charizard-section input[type="checkbox"]:checked {
+  background-color: #e5530d;
+}
+
+.mewtwo-section input[type="checkbox"] {
+  border-color: #b83784;
+  background-color: white;
+}
+
+.mewtwo-section input[type="checkbox"]:checked {
+  background-color: #b83784;
+}
+
+.pikachu-section input[type="checkbox"] {
+  border-color: #c69000;
+  background-color: white;
+}
+
+.pikachu-section input[type="checkbox"]:checked {
+  background-color: #c69000;
 }
 
 .charizard-labels-container,
