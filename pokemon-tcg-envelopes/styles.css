@@ -92,13 +92,8 @@ input[type="checkbox"] {
   transition: background-color 0.3s, transform 0.2s;
 }
 
-input[type="checkbox"]:checked {
-  transform: scale(1.1);
-}
-
 input[type="checkbox"]:focus {
   outline: none;
-  box-shadow: 0 0 5px white;
 }
 
 .charizard-section input[type="checkbox"] {
@@ -133,6 +128,27 @@ input[type="checkbox"]:focus {
 .pikachu-labels-container {
   display: flex;
   gap: 0.7rem;
+}
+
+.reset-button {
+  background-color: #613bec;
+  color: white;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.reset-button:hover {
+  background-color: #4c2eb7;
+  transform: scale(1.05);
+}
+
+.reset-button:active {
+  transform: scale(1);
 }
 
 /* ------------------ Responsivo con Media Queries ------------------ */
