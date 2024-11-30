@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     updateCounter()
+    checkSectionComplete()
 
     function handleCheckboxChange(checkbox, index) {
       if (checkbox.checked) {
@@ -56,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       updateCounter()
       saveState()
+      checkSectionComplete()
       checkAllSectionsCompleted()
     }
 
@@ -71,6 +73,17 @@ document.addEventListener("DOMContentLoaded", () => {
         .map((cb, index) => (cb.checked ? index + 1 : null))
         .filter((index) => index !== null)
       localStorage.setItem(`${groupName}-state`, JSON.stringify(state))
+    }
+
+    function checkSectionComplete() {
+      const allChecked = Array.from(checkboxes).every((cb) => cb.checked)
+      const section = container.closest("section")
+      if (allChecked) {
+        checkboxes.forEach((cb) => (cb.disabled = true))
+        if (section) {
+          section.classList.add("locked")
+        }
+      }
     }
   }
 
@@ -89,6 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const allCheckboxes = document.querySelectorAll("input[type='checkbox']")
     allCheckboxes.forEach((checkbox) => {
       checkbox.checked = false
+      checkbox.disabled = false
     })
 
     const groupNames = ["charizard", "mewtwo", "pikachu"]
@@ -101,6 +115,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       localStorage.removeItem(`${groupName}-state`)
     })
+
+    const sections = document.querySelectorAll("section")
+    sections.forEach((section) => section.classList.remove("locked"))
 
     resetButton.style.display = "none"
   }

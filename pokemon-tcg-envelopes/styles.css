@@ -40,6 +40,17 @@ section {
   padding: 0.8rem 1.2rem;
 }
 
+section.locked {
+  opacity: 0.5;
+  pointer-events: none;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+section:not(.locked) {
+  opacity: 1;
+  filter: none;
+}
+
 .charizard-section {
   background-color: #fd7d24;
 }
