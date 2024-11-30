@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const resetButton = document.createElement("button")
+  resetButton.textContent = "Resetear"
+  resetButton.className = "reset-button"
+  resetButton.style.display = "none"
+
+  document.body.appendChild(resetButton)
+
   function generateCheckboxes(containerId, groupName) {
     const container = document.getElementById(containerId)
 
@@ -15,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const counterDisplay = document.createElement("div")
     counterDisplay.className = `${groupName}-counter-display`
-    counterDisplay.textContent = `Seleccionados: 0`
+    counterDisplay.textContent = `Abiertos: 0`
 
     container.appendChild(labelsContainer)
     container.appendChild(counterDisplay)
@@ -48,15 +55,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       updateCounter()
-
       saveState()
+      checkAllSectionsCompleted()
     }
 
     function updateCounter() {
       const selectedCount = Array.from(checkboxes).filter(
         (cb) => cb.checked
       ).length
-      counterDisplay.textContent = `Seleccionados: ${selectedCount}`
+      counterDisplay.textContent = `Abiertos: ${selectedCount}`
     }
 
     function saveState() {
@@ -67,7 +74,42 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function checkAllSectionsCompleted() {
+    const allCheckboxes = document.querySelectorAll("input[type='checkbox']")
+    const allChecked = Array.from(allCheckboxes).every((cb) => cb.checked)
+
+    if (allChecked) {
+      resetButton.style.display = "block"
+    } else {
+      resetButton.style.display = "none"
+    }
+  }
+
+  function resetAll() {
+    const allCheckboxes = document.querySelectorAll("input[type='checkbox']")
+    allCheckboxes.forEach((checkbox) => {
+      checkbox.checked = false
+    })
+
+    const groupNames = ["charizard", "mewtwo", "pikachu"]
+    groupNames.forEach((groupName) => {
+      const counterDisplay = document.querySelector(
+        `.${groupName}-counter-display`
+      )
+      if (counterDisplay) {
+        counterDisplay.textContent = "Abiertos: 0"
+      }
+      localStorage.removeItem(`${groupName}-state`)
+    })
+
+    resetButton.style.display = "none"
+  }
+
+  resetButton.addEventListener("click", resetAll)
+
   generateCheckboxes("charizard-counter", "charizard")
   generateCheckboxes("mewtwo-counter", "mewtwo")
   generateCheckboxes("pikachu-counter", "pikachu")
+
+  checkAllSectionsCompleted()
 })
