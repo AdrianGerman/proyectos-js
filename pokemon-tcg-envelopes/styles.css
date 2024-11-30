@@ -34,9 +34,10 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 0.8rem;
   border-radius: 12px;
   box-shadow: 2px 2px 20px 14px rgba(0, 0, 0, 0.5);
-  padding: 0.7rem;
+  padding: 0.8rem 1.2rem;
 }
 
 .charizard-section {
