@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
       checkbox.disabled = false
     })
 
-    const groupNames = ["charizard", "mewtwo", "pikachu"]
+    const groupNames = ["charizard", "mewtwo", "pikachu", "mew"]
     groupNames.forEach((groupName) => {
       const counterDisplay = document.querySelector(
         `.${groupName}-counter-display`
@@ -127,6 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
   generateCheckboxes("charizard-counter", "charizard")
   generateCheckboxes("mewtwo-counter", "mewtwo")
   generateCheckboxes("pikachu-counter", "pikachu")
+  generateCheckboxes("mew-counter", "mew")
 
   checkAllSectionsCompleted()
 })
