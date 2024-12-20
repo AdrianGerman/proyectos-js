@@ -1,3 +1,5 @@
+let use24HourFormat = false
+
 function updateClock() {
   const now = new Date()
   const hours = now.getHours().toString().padStart(2, "0")
@@ -13,6 +15,18 @@ function handleKeyPress(event) {
   if (event.key === "Enter") {
     calculateTime()
   }
+}
+
+function toggleFormat() {
+  use24HourFormat = !use24HourFormat
+  const timeToAdd = document.getElementById("timeToAdd").value.trim()
+
+  if (timeToAdd === "") {
+    document.getElementById("result").innerHTML = ""
+    return
+  }
+
+  calculateTime()
 }
 
 function calculateTime() {
@@ -45,10 +59,12 @@ function calculateTime() {
   const formatTime = (date) => {
     let hours = date.getHours()
     const minutes = date.getMinutes().toString().padStart(2, "0")
+    if (use24HourFormat) {
+      return `${hours.toString().padStart(2, "0")}:${minutes}`
+    }
+
     const period = hours >= 12 ? "PM" : "AM"
-
     hours = hours % 12 || 12
-
     return `${hours}:${minutes} ${period}`
   }
 

@@ -27,6 +27,11 @@
         onkeypress="handleKeyPress(event)"
       />
       <button onclick="calculateTime()">Calcular</button>
+      <label class="switch">
+        <input type="checkbox" id="formatSwitch" onclick="toggleFormat()" />
+        <span class="slider"></span>
+      </label>
+      <span class="label">Formato 24 horas</span>
       <div class="result" id="result"></div>
     </div>
   </body>
