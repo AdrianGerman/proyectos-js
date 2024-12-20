@@ -17,12 +17,15 @@ function handleKeyPress(event) {
 
 function calculateTime() {
   const now = new Date()
-  const timeToAdd = document.getElementById("timeToAdd").value
+  const timeToAdd = document.getElementById("timeToAdd").value.trim()
 
-  const timeParts = timeToAdd.split(":")
+  const timeParts = timeToAdd.includes(":")
+    ? timeToAdd.split(":")
+    : [timeToAdd, "0"]
+
   if (timeParts.length !== 2 || isNaN(timeParts[0]) || isNaN(timeParts[1])) {
     document.getElementById("result").innerText =
-      "Por favor, ingrese un tiempo válido en formato hh:mm."
+      "Por favor, ingresa un tiempo válido en formato hh:mm o solo hh."
     return
   }
 
@@ -31,7 +34,7 @@ function calculateTime() {
 
   if (minutesToAdd >= 60) {
     document.getElementById("result").innerText =
-      "Por favor, ingrese un número de minutos menor a 60."
+      "Por favor, ingresa un número de minutos menor a 60."
     return
   }
 
@@ -39,16 +42,18 @@ function calculateTime() {
     now.getTime() + hoursToAdd * 60 * 60 * 1000 + minutesToAdd * 60 * 1000
   )
 
-  const formaTime = (date) => {
+  const formatTime = (date) => {
     let hours = date.getHours()
     const minutes = date.getMinutes().toString().padStart(2, "0")
     const period = hours >= 12 ? "PM" : "AM"
+
     hours = hours % 12 || 12
+
     return `${hours}:${minutes} ${period}`
   }
 
-  const currentTimeFormatted = formaTime(now)
-  const futureTimeFormatted = formaTime(futureTime)
+  const currentTimeFormatted = formatTime(now)
+  const futureTimeFormatted = formatTime(futureTime)
 
   document.getElementById(
     "result"
