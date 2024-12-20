@@ -16,8 +16,18 @@
     />
   </head>
   <body>
-    <main>
+    <div class="container">
       <h1>Calculadora de horas</h1>
-    </main>
+      <div id="clock">00:00:00</div>
+      <label for="timeToAdd">Horas y minutos a sumar:</label>
+      <input
+        type="text"
+        id="timeToAdd"
+        placeholder="Escribe el valor a sumar"
+        onkeypress="handleKeyPress(event)"
+      />
+      <button onclick="calculateTime()">Calcular</button>
+      <div class="result" id="result"></div>
+    </div>
   </body>
 </html>
