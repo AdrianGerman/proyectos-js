@@ -8,3 +8,13 @@ function updateClock() {
 
 setInterval(updateClock, 1000)
 updateClock()
+
+function handleKeyPress(event) {
+  if (event.key === "Enter") {
+    calculateTime()
+  }
+}
+
+function calculateTime() {
+  console.log("Has realizado una conversión!")
+}
