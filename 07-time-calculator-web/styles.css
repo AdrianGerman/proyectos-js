@@ -39,7 +39,7 @@ h1 {
 
 #timeToAdd,
 button {
-  background: #000209;
+  background-color: #000209;
   width: 100%;
   padding: 10px;
   margin: 10px 0;
@@ -121,4 +121,12 @@ input:checked + .slider::before {
 
 .label {
   margin-left: 10px;
+}
+input[type="text"]:-webkit-autofill {
+  background-color: #000209 !important;
+  -webkit-box-shadow: 0 0 0 1000px #000209 inset !important;
+  -webkit-text-fill-color: white !important;
+  border: 1px solid #0e111f !important;
+  border-radius: 5px !important;
+  box-sizing: border-box;
 }
