@@ -57,5 +57,5 @@ function calculateTime() {
 
   document.getElementById(
     "result"
-  ).innerText = `Hora actual: ${currentTimeFormatted}\nHora futura: ${futureTimeFormatted}`
+  ).innerHTML = `Hora actual: ${currentTimeFormatted}<br>Hora futura: <span class="future-time">${futureTimeFormatted}</span>`
 }

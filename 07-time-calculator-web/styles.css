@@ -68,3 +68,8 @@ button:hover {
   font-size: 1.2rem;
   color: #727272;
 }
+
+.future-time {
+  font-weight: bold;
+  color: white;
+}
