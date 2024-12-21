@@ -1,0 +1,32 @@
+---
+interface Props {
+  title: string
+}
+
+const { title } = Astro.props
+const description =
+  "Proyectos prácticos elaborados unicamente con HTML, CSS Y JavaScript, para mejorar en la lógica de JavaScript Vanilla."
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>
