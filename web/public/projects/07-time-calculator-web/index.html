@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculador de Hora</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./main.js" defer></script>
+
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Calculadora de horas</h1>
+      <div id="clock">00:00:00</div>
+      <label for="timeToAdd">Horas y minutos a sumar:</label>
+      <input
+        type="text"
+        id="timeToAdd"
+        placeholder="Escribe el valor a sumar"
+        onkeypress="handleKeyPress(event)"
+      />
+      <button onclick="calculateTime()">Calcular</button>
+      <label class="switch">
+        <input type="checkbox" id="formatSwitch" onclick="toggleFormat()" />
+        <span class="slider"></span>
+      </label>
+      <span class="label">Formato 24 horas</span>
+      <div class="result" id="result"></div>
+    </div>
+  </body>
+</html>

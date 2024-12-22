@@ -1,0 +1,247 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "M PLUS 1p", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #242424;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+
+h1 {
+  text-align: center;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  border-radius: 12px;
+  box-shadow: 2px 2px 20px 14px rgba(0, 0, 0, 0.5);
+  padding: 0.8rem 1.2rem;
+}
+
+section.locked {
+  opacity: 0.5;
+  pointer-events: none;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+section:not(.locked) {
+  opacity: 1;
+  filter: none;
+}
+
+.charizard-section {
+  background-color: #fd7d24;
+}
+
+.mewtwo-section {
+  background-color: #f366b9;
+}
+
+.pikachu-section {
+  background-color: #f9bf00;
+}
+
+.mew-section {
+  background-color: #f366b9;
+}
+
+.charizard-envelope,
+.mewtwo-envelope,
+.pikachu-envelope,
+.mew-envelope {
+  width: 120px;
+  height: 200px;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 300ms;
+  cursor: pointer;
+}
+
+img:hover {
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 5));
+  transform: scale(1.05);
+}
+
+.counter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  width: 55px;
+  height: 55px;
+  border: 3px solid white;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+input[type="checkbox"]:focus {
+  outline: none;
+}
+
+.charizard-section input[type="checkbox"] {
+  border-color: #e5530d;
+  background-color: white;
+}
+
+.charizard-section input[type="checkbox"]:checked {
+  background-color: #e5530d;
+}
+
+.mewtwo-section input[type="checkbox"] {
+  border-color: #b83784;
+  background-color: white;
+}
+
+.mewtwo-section input[type="checkbox"]:checked {
+  background-color: #b83784;
+}
+
+.pikachu-section input[type="checkbox"] {
+  border-color: #c69000;
+  background-color: white;
+}
+
+.pikachu-section input[type="checkbox"]:checked {
+  background-color: #c69000;
+}
+
+.mew-section input[type="checkbox"] {
+  border-color: #b83784;
+  background-color: white;
+}
+
+.mew-section input[type="checkbox"]:checked {
+  background-color: #b83784;
+}
+
+.charizard-labels-container,
+.mewtwo-labels-container,
+.pikachu-labels-container,
+.mew-labels-container {
+  display: flex;
+  gap: 0.7rem;
+}
+
+.reset-button {
+  background-color: #613bec;
+  color: white;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.reset-button:hover {
+  background-color: #4c2eb7;
+  transform: scale(1.05);
+}
+
+.reset-button:active {
+  transform: scale(1);
+}
+
+.mewtwo-expansion,
+.mew-expansion {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ------------------ Responsivo con Media Queries ------------------ */
+
+@media (max-width: 768px) {
+  body {
+    height: auto;
+  }
+  main {
+    gap: 1rem;
+  }
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  section {
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    align-items: center;
+  }
+
+  .charizard-envelope,
+  .mewtwo-envelope,
+  .pikachu-envelope,
+  .mew-envelope {
+    width: 100px;
+    height: 150px;
+  }
+
+  input[type="checkbox"] {
+    width: 45px;
+    height: 45px;
+  }
+  .charizard-labels-container,
+  .mewtwo-labels-container,
+  .pikachu-labels-container,
+  .mew-labels-container {
+    display: flex;
+    gap: 0.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  section {
+    padding: 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .charizard-envelope,
+  .mewtwo-envelope,
+  .pikachu-envelope,
+  .mew-envelope {
+    width: 80px;
+    height: 120px;
+  }
+
+  input[type="checkbox"] {
+    width: 40px;
+    height: 40px;
+  }
+
+  .counter {
+    font-size: 0.9rem;
+  }
+}

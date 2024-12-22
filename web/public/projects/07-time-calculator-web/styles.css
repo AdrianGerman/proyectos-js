@@ -1,0 +1,132 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Onest", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 400;
+  background-color: #020617;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100dvh;
+  margin: 0;
+}
+
+.container {
+  background-color: #070c1c;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 4px 3px 20px 14px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  width: 300px;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+#clock {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+
+#timeToAdd,
+button {
+  background-color: #000209;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #0e111f;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: white;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+
+  background-color: #336234;
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #727272;
+}
+
+.future-time {
+  font-weight: bold;
+  color: white;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 50px;
+  transition: 0.4s;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 15px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:checked + .slider::before {
+  transform: translateX(20px);
+}
+
+.label {
+  margin-left: 10px;
+}
+input[type="text"]:-webkit-autofill {
+  background-color: #000209 !important;
+  -webkit-box-shadow: 0 0 0 1000px #000209 inset !important;
+  -webkit-text-fill-color: white !important;
+  border: 1px solid #0e111f !important;
+  border-radius: 5px !important;
+  box-sizing: border-box;
+}
