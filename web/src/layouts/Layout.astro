@@ -17,13 +17,11 @@ const description =
     <meta name="generator" content={description} />
     <title>{title}</title>
   </head>
-  <body>
-    <div class="relative h-full w-full bg-slate-950">
-      <div
-        class="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_500px_at_50%_200px,#3e3e3e,transparent)]"
-      >
-        <slot />
-      </div>
+  <body class="relative min-h-screen w-full bg-slate-950 bg-current">
+    <div
+      class="absolute inset-0 bg-[radial-gradient(circle_500px_at_50%_200px,#3e3e3e,transparent)]"
+    >
+      <slot />
     </div>
   </body>
 </html>
