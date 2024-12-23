@@ -1,0 +1,26 @@
+---
+import { PROJECTS } from "../data"
+
+import Layout from "../layouts/Layout.astro"
+
+export function getStaticPaths() {
+  return PROJECTS.map((project) => {
+    return {
+      params: {
+        project: project.slug
+      }
+    }
+  })
+}
+
+const { project } = Astro.params
+const index = PROJECTS.findIndex((p) => p.slug === project)
+const info = PROJECTS[index]
+---
+
+<Layout title={`Proyecto de JavaScript - ${info.title}`}>
+  <iframe
+    title={`${info.title}`}
+    class="w-screen h-dvh"
+    src={`/projects/${project}/index.html`}></iframe>
+</Layout>
